@@ -48,28 +48,31 @@ class Thiev {
     this.color = ( 255 );
   }
   update() {
-    this.acceleration.add( ( noise( frameCount / 10000 ) - .5 ) * .01, ( noise( frameCount / 8000 ) - .5 ) * .01 );
+    // this.acceleration.add( ( noise( frameCount / 1000 ) - .5 ) * .3, ( noise( frameCount / 8000 ) - .5 ) * .01 );
+    let nsz = (noise( frameCount / 400 ) - .5 ) * .05;
+    this.acceleration.add( nsz, 0);
     this.velocity.add( this.acceleration );
+    this.velocity.limit(5);
     this.location.add( this.velocity );
     this.acceleration.mult( 0 );
-    // if ( this.location.x < 20 || this.location.x > width - 20 ) {
-    //   this.velocity.x *= -1;
+    if ( this.location.x < 20 || this.location.x > width - 20 ) {
+      this.velocity.x *= -1;
+    }
+    if ( this.location.y < 20 || this.location.y > height - 20 ) {
+      this.velocity.y *= -1;
+    }
+    // if ( this.location.x < 0 ) {
+    //   this.location.x = width;
     // }
-    // if ( this.location.y < 20 || this.location.y > height - 20 ) {
-    //   this.velocity.y *= -1;
+    // if ( this.location.y < 0 ) {
+    //   this.location.y = height;
     // }
-    if ( this.location.x < 0 ) {
-      this.location.x = width;
-    }
-    if ( this.location.y < 0 ) {
-      this.location.y = height;
-    }
-    if ( this.location.x > width ) {
-      this.location.x = 0;
-    }
-    if ( this.location.y > height ) {
-      this.location.y = 0;
-    }
+    // if ( this.location.x > width ) {
+    //   this.location.x = 0;
+    // }
+    // if ( this.location.y > height ) {
+    //   this.location.y = 0;
+    // }
   }
   display() {
     if ( out1 && out2 ) this.color = color( 255 );
@@ -84,10 +87,11 @@ class Thiev {
 }
 
 function mouseDragged() {
-  t.velocity.mult( 0.98 );
+  // t.velocity.mult( 0.98 );
 }
 
 function mousePressed() {
-  console.log( "go" );
-  t.velocity.mult( 2 );
+
+   save("image.jpg")
+  // t.velocity.mult( 2 );
 }
