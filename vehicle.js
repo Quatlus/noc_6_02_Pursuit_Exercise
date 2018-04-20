@@ -2,6 +2,9 @@
 // Daniel Shiffman
 // http://natureofcode.com
 // The "Vehicle" class
+//
+// Modified code for exercise
+//
 class Vehicle {
   constructor( x, y ) {
       this.acceleration = createVector( 0, 0 );

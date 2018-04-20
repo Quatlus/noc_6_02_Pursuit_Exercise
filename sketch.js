@@ -5,6 +5,9 @@
 // Implements Craig Reynold's autonomous steering behaviors
 // One vehicle "arrive"
 // See: http://www.red3d.com/cwr/
+//
+// Modified code for exercise
+//
 let v;
 let vbetter;
 let t;
@@ -49,10 +52,10 @@ class Thiev {
   }
   update() {
     // this.acceleration.add( ( noise( frameCount / 1000 ) - .5 ) * .3, ( noise( frameCount / 8000 ) - .5 ) * .01 );
-    let nsz = (noise( frameCount / 400 ) - .5 ) * .05;
-    this.acceleration.add( nsz, 0);
+    let nsz = ( noise( frameCount / 400 ) - .5 ) * .05;
+    this.acceleration.add( nsz, 0 );
     this.velocity.add( this.acceleration );
-    this.velocity.limit(5);
+    this.velocity.limit( 5 );
     this.location.add( this.velocity );
     this.acceleration.mult( 0 );
     if ( this.location.x < 20 || this.location.x > width - 20 ) {
@@ -91,7 +94,6 @@ function mouseDragged() {
 }
 
 function mousePressed() {
-
-   save("image.jpg")
-  // t.velocity.mult( 2 );
+  save( "image.jpg" )
+    // t.velocity.mult( 2 );
 }
