@@ -14,17 +14,23 @@ let t;
 let result = [ 0, 0 ];
 let out1 = 0;
 let out2 = 0;
+let dot;
 
 function setup() {
-  createCanvas( 640, 360 );
+  createCanvas( 640, 400 );
   v = new Vehicle( 0, height );
   vbetter = new Vehicle( 0, height );
   t = new Thiev();
+  dot = new Dot();
 }
 
 function draw() {
   background( 51 );
   let mouse = createVector( mouseX, mouseY );
+  dot.display();
+  dot.update( vbetter );
+  dot.update( v );
+  dot.update( t );
   // Draw an ellipse at the mouse position
   fill( 127 );
   stroke( 200 );
@@ -47,7 +53,7 @@ class Thiev {
   constructor() {
     this.acceleration = createVector( 0, 0 );
     this.velocity = createVector( -2, -2 );
-    this.location = createVector( width / 2, height / 2 );
+    this.position = createVector( width / 2, height / 2 );
     this.color = ( 255 );
   }
   update() {
@@ -56,33 +62,21 @@ class Thiev {
     this.acceleration.add( nsz, 0 );
     this.velocity.add( this.acceleration );
     this.velocity.limit( 5 );
-    this.location.add( this.velocity );
+    this.position.add( this.velocity );
     this.acceleration.mult( 0 );
-    if ( this.location.x < 20 || this.location.x > width - 20 ) {
+    if ( this.position.x < 20 || this.position.x > width - 20 ) {
       this.velocity.x *= -1;
     }
-    if ( this.location.y < 20 || this.location.y > height - 20 ) {
+    if ( this.position.y < 20 || this.position.y > height - 20 ) {
       this.velocity.y *= -1;
     }
-    // if ( this.location.x < 0 ) {
-    //   this.location.x = width;
-    // }
-    // if ( this.location.y < 0 ) {
-    //   this.location.y = height;
-    // }
-    // if ( this.location.x > width ) {
-    //   this.location.x = 0;
-    // }
-    // if ( this.location.y > height ) {
-    //   this.location.y = 0;
-    // }
   }
   display() {
     if ( out1 && out2 ) this.color = color( 255 );
     if ( !out1 && !out2 ) this.color = color( 128 );
     fill( this.color );
-    ellipse( this.location.x, this.location.y, 30 );
-    line( this.location.x, this.location.y, this.location.x + this.velocity.x * 50, this.location.y + this.velocity.y * 50 );
+    ellipse( this.position.x, this.position.y, 30 );
+    line( this.position.x, this.position.y, this.position.x + this.velocity.x * 50, this.position.y + this.velocity.y * 50 );
   }
   set fillColor( color ) {
     this._color = color;
@@ -94,6 +88,6 @@ function mouseDragged() {
 }
 
 function mousePressed() {
-  save( "image.jpg" )
-    // t.velocity.mult( 2 );
+  // save( "image.jpg" )
+  // t.velocity.mult( 2 );
 }

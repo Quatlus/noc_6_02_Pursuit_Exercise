@@ -14,7 +14,7 @@ class Vehicle {
       this.maxspeed = 4;
       this.maxforce = 0.05;
     }
-    // Method to update location
+    // Method to update position
   update() {
     // Update velocity
     this.velocity.add( this.acceleration );
@@ -35,8 +35,8 @@ class Vehicle {
     strokeWeight( 1 );
     var brake, d;
     if ( modus === true ) {
-      var braker = p5.Vector.sub( target.location, this.position );
-      var desired = p5.Vector.sub( p5.Vector.add( target.location, targetvel.mult( 50 ) ), this.position );
+      var braker = p5.Vector.sub( target.position, this.position );
+      var desired = p5.Vector.sub( p5.Vector.add( target.position, targetvel.mult( 50 ) ), this.position );
       stroke( 225, 100 );
       line( this.position.x, this.position.y, this.position.x + desired.x, this.position.y + desired.y );
       brake = braker.mag();
@@ -52,7 +52,7 @@ class Vehicle {
       }
       fill( 255, 102, 102 );
     } else {
-      var desired = p5.Vector.sub( target.location, this.position ); // A vector pointing from the location to the target
+      var desired = p5.Vector.sub( target.position, this.position ); // A vector pointing from the position to the target
       stroke( 225, 100 );
       line( this.position.x, this.position.y, this.position.x + desired.x, this.position.y + desired.y );
       d = desired.mag();
